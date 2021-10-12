@@ -4,7 +4,7 @@ class CreateWalks < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :walk_count
       t.string :memo
-      t.string :image_id
+      t.string :walk_image_id
 
       t.timestamps
     end

@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2021_10_12_081957) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name"
+    t.string "profile_image_id"
+    t.string "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -29,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_10_12_081957) do
     t.integer "user_id"
     t.integer "walk_count"
     t.string "memo"
-    t.string "image_id"
+    t.string "walk_image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
