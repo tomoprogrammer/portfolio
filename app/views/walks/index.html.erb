@@ -1,0 +1,18 @@
+<tbody>
+<% @walks.each do |walk| %>
+<tr>
+  <td>日時
+    <%= link_to walk.created_at.strftime('%Y/%m/%d'), walk_path(walk.id) %>
+  </td>
+  <td>歩数
+    <%= walk.walk_count %>歩
+  </td>
+  <td>メモ
+    <%= walk.memo %>
+  </td>
+  <td>写真
+    <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  </td>
+  </tr>
+  <% end %>
+  </tbody>

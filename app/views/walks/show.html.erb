@@ -1,0 +1,19 @@
+<tbody>
+  <tr>
+    <td>
+     <%= @walk.walk_count %>歩
+     </td>
+     <td>
+       <%= @walk.memo %>
+       </td>
+       <td>
+         <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %>
+         </td>
+         <td>
+           <%= link_to "修正する", edit_walk_path(@walk.id), class: "btn btn-sm btn-success" %>
+           </td>
+           <td>
+             <%= link_to "取消", walk_path(@walk.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
+             </td>
+  </tr>
+</tbody>

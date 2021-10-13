@@ -2,3 +2,13 @@
 <%= form_with model: @walk, local:true do |f| %>
 
 <h4>歩数</h4>
+<%= f.text_field :walk_count, class:"form-control walk_walk_count" %>
+
+<h4>メモ</h4>
+<%= f.text_area :memo, class:"form-control walk_memo" %>
+
+<h4>画像</h4>
+<%= f.attachment_field :walk_image, class: "form-control-file" %>
+
+<%= f.submit '歩数を記録する', class:"btn btn-success" %>
+<% end %>
