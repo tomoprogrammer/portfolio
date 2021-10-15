@@ -12,10 +12,12 @@ class WalksController < ApplicationController
 
   def index
     @walks = Walk.all
+    @user = current_user
   end
 
   def show
     @walk = Walk.find(params[:id])
+    @user = @walk.user
   end
 
   def edit

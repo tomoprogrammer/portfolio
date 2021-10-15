@@ -1,18 +1,42 @@
+ <div class="container">
+  <div class="row">
+   <div class="col-md-3"><%= render 'users/list', user: @user %>
+   <div class="col-md-8 offset-md-1">
+    <h1>歩数記録一覧</h1>
+     <table class="table table-hover table-inverse">
+      <thead>
+       <tr>
+        <th></th>
+        <th>記録日時</th>
+        <th>歩数</th>
+        <th>メモ</th>
+        <th>写真</th>
+       </tr>
+      </thead>
 <tbody>
 <% @walks.each do |walk| %>
 <tr>
-  <td>日時
+  <td>
+   <%= link_to user_path(walk.user.id) do %>
+    <%= attachment_image_tag walk.user, :profile_image, size: "40x40", format: 'jpeg' , fallback: "no_image.jpg" %>
+   <% end %>
+  </td>
+  <td>
     <%= link_to walk.created_at.strftime('%Y/%m/%d'), walk_path(walk.id) %>
   </td>
-  <td>歩数
+  <td>
     <%= walk.walk_count %>歩
   </td>
-  <td>メモ
+  <td>
     <%= walk.memo %>
   </td>
-  <td>写真
+  <td>
     <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
   </td>
   </tr>
   <% end %>
   </tbody>
+  </table>
+  </div>
+  </div>
+  </div>

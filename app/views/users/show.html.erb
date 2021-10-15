@@ -1,4 +1,9 @@
-<h2>User info</h2>
+<div class="container">
+  <div class="row">
+   <div class="col-md-3">
+ <%= render 'users/list', user: @user %>
+   <div class="col-md-8 offset-md-1">
+    <h2>User info</h2>
  <div class="profile-container">
 <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
 <table class="table">
@@ -12,6 +17,25 @@
       <th>introduction</th>
       <th class="introduction"><%= @user.introduction %></th>
      </tr>
+
+     <table>
+      <% @walks.each do |walk| %>
+     <tr>
+      <td>日時
+       <%= link_to walk.created_at.strftime('%Y/%m/%d'), walk_path(walk.id) %>
+      </td>
+       <td>歩数
+        <%= walk.walk_count %>
+       </td>
+       <td>メモ
+        <%= walk.memo %>
+       </td>
+       <td>写真
+        <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+       </td>
+       </tr>
+      <% end %>
+      </table>
 
       <% if @user.id == current_user.id %>
     <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>

@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
   def index
     @users = User.all
+    @user = current_user
   end
 
   def show
     @user = User.find(params[:id])
-    # @walks = @user.walks.page(params[:page]).reverse_order
+    @walks = @user.walk
   end
 
   def edit
