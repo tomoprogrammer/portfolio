@@ -35,6 +35,23 @@
   <td>
     <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg' %>
   </td>
+   <% if walk.favorited_by?(current_user) %>
+             <td id="favorite_buttons_<%= walk.id %>">
+              <%= link_to walk_favorites_path(walk.id), method: :delete do %>
+               ♥<%= walk.favorites.count %>
+             <% end %>
+             </td>
+             <% else %>
+             <td>
+              <%= link_to walk_favorites_path(walk.id), method: :post do %>
+               ♡<%= walk.favorites.count %>
+              <% end %>
+             </td>
+             <% end %>
+            <td>
+             コメント件数：<%= walk.walk_comments.count %>
+             </td>
+
   </tr>
   <% end %>
   </tbody>

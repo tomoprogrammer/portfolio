@@ -18,6 +18,7 @@ class WalksController < ApplicationController
   def show
     @walk = Walk.find(params[:id])
     @user = @walk.user
+    @walk_comment = WalkComment.new
   end
 
   def edit
