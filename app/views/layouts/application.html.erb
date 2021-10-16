@@ -11,17 +11,23 @@
 
   <body>
     <header>
+       <nav class="navbar navbar-expend-lg navbar-dark bg-dark" >
+     <div class="container">
+      <div class="container">
+      <ul class="list-group-horizontal navbar-nav ml-auto">
     <% if user_signed_in? %>
-    <li>
+    <li class="margin-right">
      <%= link_to "マイページ", user_path(current_user.id) %>
     </li>
-    <li>
+    <li class="margin-right">
+      <%= link_to "記録作成", new_walk_path %>
+    <li class="margin-right">
       <%= link_to "記録一覧", walks_path %>
     </li>
-    <li>
+    <li class="margin-right">
      <%= link_to "ユーザー一覧", users_path %>
     </li>
-    <li>
+    <li class="margin-right">
      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
     </li>
 
@@ -33,6 +39,9 @@
         <%= link_to "ログイン", new_user_session_path %>
       </li>
     <% end %>
+    </ul>
+    </nav>
+    </div>
     </header>
     <main>
     <%= yield %>

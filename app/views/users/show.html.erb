@@ -2,10 +2,12 @@
   <div class="row">
    <div class="col-md-3">
  <%= render 'users/list', user: @user %>
+ </div>
    <div class="col-md-8 offset-md-1">
-    <h2>User info</h2>
+    <% unless current_user == @user %>
  <div class="profile-container">
-<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+<%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg' %>
+
 <table class="table">
     <tbody><tr></tr>
      <tr>
@@ -17,7 +19,22 @@
       <th>introduction</th>
       <th class="introduction"><%= @user.introduction %></th>
      </tr>
-
+     <% end %>
+     </table>
+     </div>
+<div class="col-md-8 offset-md-1">
+    <h2><%= @user.name %>さんの記録</h2>
+     <table class="table table-hover table-inverse">
+      <thead>
+       <tr>
+        <th></th>
+        <th>記録日時</th>
+        <th>歩数</th>
+        <th>メモ</th>
+        <th>写真</th>
+       </tr>
+      </thead>
+      <tbody>
      <table>
       <% @walks.each do |walk| %>
      <tr>
@@ -31,12 +48,14 @@
         <%= walk.memo %>
        </td>
        <td>写真
-        <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+        <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg' %>
        </td>
        </tr>
       <% end %>
       </table>
-
+      </tbody>
       <% if @user.id == current_user.id %>
     <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
   <% end %>
+  </div>
+  </div>

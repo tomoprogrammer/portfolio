@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row">
    <div class="col-md-3"><%= render 'users/list', user: @user %>
-   <div class="col-md-8 offset-md-1"><tbody>
+   <div class="col-md-8 offset-md-1">
+    <tbody>
+
   <tr>
     <td>
      <%= @walk.walk_count %>歩
@@ -10,7 +12,7 @@
        <%= @walk.memo %>
        </td>
        <td>
-         <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg', fallback: "no_image.jpg" %>
+         <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg' %>
          </td>
          <td>
            <%= link_to "修正する", edit_walk_path(@walk.id), class: "btn btn-sm btn-success" %>
