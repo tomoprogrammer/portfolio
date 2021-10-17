@@ -18,11 +18,31 @@
         コメント件数：<%= @walk.walk_comments.count %>
          </td>
          <td>
-<% @walk.walk_comments.each do |walk_comment| %>
-  <%= walk_comment.user.name %>
-  <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
-  <% end %>
-  </td>
+             <% @walk.walk_comments.each do |walk_comment| %>
+                 <%= walk_comment.user.name %>
+                 <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
+                 </td>
+                 <% if walk_comment.user == current_user %>
+                     <td>
+                          <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
+                     </td>
+                 <% end %>
+             <% end %>
+          </td>
+          <% if @walk.favorited_by?(current_user) %>
+             <td id="favorite_buttons_<%= @walk.id %>">
+              <%= link_to walk_favorites_path(@walk.id), method: :delete do %>
+               ♥<%= @walk.favorites.count %>
+             <% end %>
+             </td>
+             <% else %>
+             <td>
+              <%= link_to walk_favorites_path(@walk.id), method: :post do %>
+               ♡<%= @walk.favorites.count %>
+              <% end %>
+             </td>
+             <% end %>
+             </tr>
   <td>
 <%= form_with(model:[@walk, @walk_comment], local: true) do |f| %>
   <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
