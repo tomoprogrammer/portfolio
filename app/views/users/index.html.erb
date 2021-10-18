@@ -1,20 +1,21 @@
 <div class="container">
   <div class="row">
-   <div class="col-md-3">
- <%= render 'users/list', user: @user %>
-   <div class="col-md-8 offset-md-1">
-<tbody>
-  <% @users.each do |user| %>
-  <tr>
-   <td>
-     <%= attachment_image_tag user, :profile_image, :fill,40,40, format: 'jpag' %>
-   </td>
-   <td>
-     <%= user.name %>
-   </td>
-   <td>
-     <%= link_to '詳細', user_path(user.id) %>
-   </td>
-  </tr>
-  <% end %>
- </tbody>
+    <div class="col-md-3">
+      <%= render 'users/list', user: @user %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= attachment_image_tag user, :profile_image, :fill,40,40, format: 'jpag' %>
+            </td>
+            <td>
+              <%= user.name %>
+            </td>
+            <td>
+              <%= link_to '詳細', user_path(user.id) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>

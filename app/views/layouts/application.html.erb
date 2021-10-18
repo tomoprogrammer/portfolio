@@ -1,52 +1,52 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>walk_life</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <script src="https://kit.fontawesome.com/37a1a86a06.js" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <html>
+    <head>
+      <title>walk_life</title>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+          <script src="https://kit.fontawesome.com/37a1a86a06.js" crossorigin="anonymous"></script>
+          <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+          <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-  <body>
-    <header>
-       <nav class="navbar navbar-expend-lg navbar-dark bg-dark" >
-     <div class="container">
-      <div class="container">
-      <ul class="list-group-horizontal navbar-nav ml-auto">
-    <% if user_signed_in? %>
-    <li class="margin-right">
-     <%= link_to "マイページ", user_path(current_user.id) %>
-    </li>
-    <li class="margin-right">
-      <%= link_to "記録作成", new_walk_path %>
-    <li class="margin-right">
-      <%= link_to "記録一覧", walks_path %>
-    </li>
-    <li class="margin-right">
-     <%= link_to "ユーザー一覧", users_path %>
-    </li>
-    <li class="margin-right">
-     <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    </li>
-
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
-    </ul>
-    </nav>
-    </div>
-    </header>
-    <main>
-    <%= yield %>
-    </main>
-    <footer>
-    </footer>
+    <body>
+      <header>
+        <nav class="navbar navbar-expend-lg navbar-dark bg-dark" >
+          <div class="container">
+            <div class="container">
+              <ul class="list-group-horizontal navbar-nav ml-auto">
+                <% if user_signed_in? %>
+                  <li class="margin-right">
+                    <%= link_to "マイページ", user_path(current_user.id) %>
+                  </li>
+                  <li class="margin-right">
+                    <%= link_to "記録作成", new_walk_path %>
+                  <li class="margin-right">
+                    <%= link_to "記録一覧", walks_path %>
+                  </li>
+                  <li class="margin-right">
+                    <%= link_to "ユーザー一覧", users_path %>
+                  </li>
+                  <li class="margin-right">
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                  </li>
+                <% else %>
+                  <li>
+                    <%= link_to "新規登録", new_user_registration_path %>
+                  </li>
+                  <li>
+                    <%= link_to "ログイン", new_user_session_path %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <%= yield %>
+      </main>
+      <footer>
+      </footer>
   </body>
 </html>

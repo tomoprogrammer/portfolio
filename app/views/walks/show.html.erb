@@ -1,59 +1,62 @@
 <div class="container">
   <div class="row">
-   <div class="col-md-3"><%= render 'users/list', user: @user %>
-   <div class="col-md-8 offset-md-1">
-    <tbody>
-
-  <tr>
-    <td>
-     <%= @walk.walk_count %>歩
-     </td>
-     <td>
-       <%= @walk.memo %>
-       </td>
-       <td>
-         <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg' %>
-         </td>
-         <td>
-        コメント件数：<%= @walk.walk_comments.count %>
-         </td>
-         <td>
-             <% @walk.walk_comments.each do |walk_comment| %>
-                 <%= walk_comment.user.name %>
-                 <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
-                 </td>
-                 <% if walk_comment.user == current_user %>
-                     <td>
-                          <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
-                     </td>
-                 <% end %>
-             <% end %>
+    <div class="col-md-3">
+      <%= render 'users/list', user: @user %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <tbody>
+        <tr>
+          <td>
+            <%= @walk.walk_count %>歩
           </td>
-          <% if @walk.favorited_by?(current_user) %>
-             <td id="favorite_buttons_<%= @walk.id %>">
-              <%= link_to walk_favorites_path(@walk.id), method: :delete do %>
-               ♥<%= @walk.favorites.count %>
+          <td>
+            <%= @walk.memo %>
+          </td>
+          <td>
+            <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg' %>
+          </td>
+          <td>
+            コメント件数：<%= @walk.walk_comments.count %>
+          </td>
+          <td>
+            <% @walk.walk_comments.each do |walk_comment| %>
+              <%= walk_comment.user.name %>
+                <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
+          </td>
+             <% if walk_comment.user == current_user %>
+               <td>
+                 <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
+               </td>
              <% end %>
-             </td>
-             <% else %>
+           <% end %>
+          </td>
+            <% if @walk.favorited_by?(current_user) %>
+              <td id="favorite_buttons_<%= @walk.id %>">
+                <%= link_to walk_favorites_path(@walk.id), method: :delete do %>
+                  ♥<%= @walk.favorites.count %>
+                <% end %>
+              </td>
+            <% else %>
+               <td>
+                 <%= link_to walk_favorites_path(@walk.id), method: :post do %>
+                   ♡<%= @walk.favorites.count %>
+                 <% end %>
+               </td>
+             <% end %>
              <td>
-              <%= link_to walk_favorites_path(@walk.id), method: :post do %>
-               ♡<%= @walk.favorites.count %>
-              <% end %>
+               <%= link_to "修正する", edit_walk_path(@walk.id), class: "btn btn-sm btn-success" %>
              </td>
-             <% end %>
-             </tr>
-  <td>
-<%= form_with(model:[@walk, @walk_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-<% end %>
-</td>
-         <td>
-           <%= link_to "修正する", edit_walk_path(@walk.id), class: "btn btn-sm btn-success" %>
-           </td>
-           <td>
-             <%= link_to "取消", walk_path(@walk.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
+             <td>
+               <%= link_to "取消", walk_path(@walk.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" %>
              </td>
-  </tr>
-</tbody>
+        </tr>
+         <div>
+           <%= form_with(model:[@walk, @walk_comment], local: true) do |f| %>
+             <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+               <%= f.submit "送信する" %>
+           <% end %>
+         </div>
+      </tbody>
+    </div>
+  </div>
+</div>
