@@ -6,8 +6,14 @@ class WalksController < ApplicationController
   def create
     @walk = Walk.new(walk_params)
     @walk.user_id = current_user.id
-    @walk.save
-    redirect_to walks_path
+    if @walk.save
+      flash[:notice] = '記録が完了しました'
+      redirect_to walks_path
+    else
+      @user = current_user
+      @walks = Walk.new
+      render :new
+    end
   end
 
   def index
@@ -27,8 +33,12 @@ class WalksController < ApplicationController
 
   def update
     @walk = Walk.find(params[:id])
-    @walk.update(walk_params)
-    redirect_to walk_path(@walk.id)
+    if @walk.update(walk_params)
+      flash[:notice] = '修正が完了しました'
+      redirect_to walk_path(@walk.id)
+    else
+      render :edit
+    end
   end
 
   def destroy

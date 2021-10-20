@@ -1,18 +1,24 @@
- <h2>User info</h2>
-   <%= form_with model:@user, local:true do |f| %>
-     <div class="form-group">
-       <label for="inputName">Name</label>
-         <%= f.text_field :name, autofocus: true, id:"inputName", class: "form-control" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2>ユーザー編集</h2>
+        <%= form_with model:@user, local:true do |f| %>
+          <div class="form-group">
+            <label for="inputName">名前</label>
+              <%= f.text_field :name, autofocus: true, id:"inputName", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <lavel for="inputIntroduction">自己紹介</lavel>
+              <%= f.text_area :introduction, autofocus: true, id:"introduction", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label for="inputImage">ユーザー画像</label>
+              <%= f.attachment_field :profile_image, class: "form-control-file" %>
+          </div>
+            <div class="form-group">
+              <%= f.submit "情報を更新する", class: "btn btn-secondary" %>
+            </div>
+         <% end %>
      </div>
-       <div class="form-group">
-         <label for="inputImage">Image</label>
-           <%= f.attachment_field :profile_image, class: "form-control-file" %>
-       </div>
-       <div class="form-group">
-         <lavel for="inputIntroduction">Introduction</lavel>
-           <%= f.text_area :introduction, autofocus: true, id:"introduction", class: "form-control" %>
-       </div>
-       <div class="form-group">
-         <%= f.submit "Update User", class: "btn btn-secondary" %>
-       </div>
-    <% end %>
+   </div>
+ </div>

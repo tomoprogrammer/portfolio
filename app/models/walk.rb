@@ -7,4 +7,8 @@ class Walk < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
+
+  validates :walk_count, presence: true
+
+  validates :memo, presence: true, length: { maximum: 100 }
 end
