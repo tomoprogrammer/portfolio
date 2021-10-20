@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'homes#top'
 
+  get 'home/about' => 'homes#about'
+
+  get '/search', to: 'searches#search'
+
   resources :walks, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resources :walk_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]

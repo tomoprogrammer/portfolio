@@ -13,29 +13,36 @@
       <header>
         <nav class="navbar navbar-expend-lg navbar-dark bg-dark" >
           <div class="container">
+            <%= link_to "WALK-life", root_path, class: "navbar-brand" %>
             <div class="container">
               <ul class="list-group-horizontal navbar-nav ml-auto">
                 <% if user_signed_in? %>
+                <div class="d-flex justify-content-center">
+          　　　 　　　<%= render 'searches/form' %>
+        　　　　　　　</div>
                   <li class="margin-right">
-                    <%= link_to "マイページ", user_path(current_user.id) %>
+                    <%= link_to "マイページ", user_path(current_user.id), class: "fas fa-user nav-info text-info mr-2" %>
                   </li>
                   <li class="margin-right">
-                    <%= link_to "記録作成", new_walk_path %>
+                    <%= link_to "記録作成", new_walk_path, class: "fas fa-walking nav-info text-info" %>
                   <li class="margin-right">
-                    <%= link_to "記録一覧", walks_path %>
+                    <%= link_to "記録一覧", walks_path, class: "fas fa-shoe-prints nav-info text-info" %>
                   </li>
                   <li class="margin-right">
-                    <%= link_to "ユーザー一覧", users_path %>
+                    <%= link_to "ユーザー一覧", users_path, class: "fas fa-users nav-info text-info" %>
                   </li>
                   <li class="margin-right">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "fas fa-door-closed nav-info text-info" %>
                   </li>
                 <% else %>
                   <li>
-                    <%= link_to "新規登録", new_user_registration_path %>
+                    <%= link_to "新規登録", new_user_registration_path, class: "fas fa-user-plus nav-info text-info" %>
                   </li>
                   <li>
-                    <%= link_to "ログイン", new_user_session_path %>
+                    <%= link_to "ログイン", new_user_session_path, class: "fas fa-door-open, nav-info text-info" %>
+                  </li>
+                  <li class="margin-right">
+                  <%= link_to "このサイトについて", home_about_path, class: "fas fa-chalkboard nav-info text-info" %>
                   </li>
                 <% end %>
               </ul>
