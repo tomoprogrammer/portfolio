@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'calendars/index'
   devise_for :users
   root to: 'homes#top'
 
@@ -18,5 +19,7 @@ Rails.application.routes.draw do
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
+  
+  resources :calendars, only: [:index]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

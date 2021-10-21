@@ -1,4 +1,6 @@
 class WalksController < ApplicationController
+  include Common
+
   def new
     @walk = Walk.new
   end
@@ -19,12 +21,24 @@ class WalksController < ApplicationController
   def index
     @walks = Walk.all
     @user = current_user
+    @walk_ranking = get_walk_ranking
   end
 
   def show
     @walk = Walk.find(params[:id])
     @user = @walk.user
     @walk_comment = WalkComment.new
+
+    # Make Ranking
+    # walk_sum = Walk.limit(5).order('walk_count desc').group(:user_id).sum(:walk_count)
+    # @walk_ranking = []
+    # walk_sum.each do |key, value|
+    #   user = User.find(key)
+    #  @walk_ranking += [user: user, walk_count: value]
+    # end
+
+    @walk_ranking = get_walk_ranking
+    # binding.irb
   end
 
   def edit

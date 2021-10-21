@@ -1,7 +1,7 @@
  <div class="container">
    <div class="row">
      <div class="col-md-3">
-       <%= render 'users/list', user: @user %>
+       <%= render 'users/list', user: current_user, walk_ranking: @walk_ranking %>
      </div>
      <div class="col-md-8 offset-md-1">
        <h1>歩数記録一覧</h1>
@@ -51,7 +51,6 @@
                    <td>
                      コメント件数：<%= walk.walk_comments.count %>
                    </td>
-
                 </tr>
               <% end %>
             </tbody>

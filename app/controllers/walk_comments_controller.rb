@@ -4,7 +4,7 @@ class WalkCommentsController < ApplicationController
     @comment = current_user.walk_comments.new(walk_comment_params)
     @comment.user_id = current_user.id
     @comment.walk_id = @walk.id
-    @comment.save!
+    @comment.save
     redirect_to walk_path(@walk)
   end
 

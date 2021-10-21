@@ -13,8 +13,31 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-
+//= require moment
+//= require fullcalendar
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// $(function () {
+
+    $(document).on('turbolinks:load', function () {
+        $('#calendar').fullCalendar({
+            //option
+        });
+        /*
+        function eventCalendar() {
+            return $('#calendar').fullCalendar({});
+        };
+        function clearCalendar() {
+            $('#calendar').html('');
+        };
+        $(document).on('turbolinks:load', function () {
+            alert('TEST');
+          eventCalendar();
+        });
+        $(document).on('turbolinks:before-cache', clearCalendar);
+        */
+    });
+// });

@@ -75,3 +75,6 @@ gem 'pry-byebug'
 group :development, :test do
   gem 'rubocop-airbnb'
 end
+
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'

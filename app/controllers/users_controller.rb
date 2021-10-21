@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
+  include Common
+
   def index
     @users = User.all
     @user = current_user
+    @walk_ranking = get_walk_ranking
   end
 
   def show
     @user = User.find(params[:id])
     @walks = @user.walks
+    @walk_ranking = get_walk_ranking
   end
 
   def edit
