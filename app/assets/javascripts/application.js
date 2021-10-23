@@ -24,9 +24,14 @@
 
     $(document).on('turbolinks:load', function () {
         $('#calendar').fullCalendar({
-            //option
+            locale: 'ja',
+            events: '/calendars.json',
+            eventRender: function(event, element) {
+                $(element).find(".fc-time").remove();
+            }
         });
         /*
+
         function eventCalendar() {
             return $('#calendar').fullCalendar({});
         };
@@ -40,4 +45,6 @@
         $(document).on('turbolinks:before-cache', clearCalendar);
         */
     });
+
+
 // });
