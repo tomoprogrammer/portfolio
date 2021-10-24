@@ -11,12 +11,12 @@ class WalksController < ApplicationController
     if @walk.save
       #Calendar.save_calendar(@walk.created_at.strftime("%Y-%m-%d"))
       date = @walk.created_at.strftime("%Y-%m-%d")
-      #if Calendar.where(start: date).blank?
-      #  @calendar = Calendar.new({user_id: current_user.id, start: date, end: date})
-      #  @calendar.save
-      #end
-      # c = Calendar.where(start: date)
-      #  cal = Calendar.where(start: date).count = c.count + @walk.walk_count;  cal.save
+      if Calendar.where(start: date).blank?
+        @calendar = Calendar.new({user_id: current_user.id, start: date, end: date})
+        @calendar.save
+      end
+      #c = Calendar.where(start: date)
+        #cal = Calendar.where(start: date).count = c.count + @walk.walk_count;  cal.save
       flash[:notice] = '記録が完了しました'
       redirect_to walks_path
     else
@@ -27,7 +27,12 @@ class WalksController < ApplicationController
   end
 
   def index
-    @walks = Walk.all
+    if params[:date].present?
+      date = DateTime.parse(params[:date])
+      @walks = Walk.where('created_at >= ?  AND created_at < ?', date, date + 1)
+    else
+      @walks = Walk.all
+    end
     @user = current_user
     @walk_ranking = get_walk_ranking
   end
@@ -55,7 +60,7 @@ class WalksController < ApplicationController
 
   def update
     @walk = Walk.find(params[:id])
-    #@walk.count
+    @walk.count
     if @walk.update(walk_params)
       flash[:notice] = '修正が完了しました'
       redirect_to walk_path(@walk.id)
@@ -66,10 +71,10 @@ class WalksController < ApplicationController
 
   def destroy
     @walk = Walk.find(params[:id])
-    # if Walk.where('created_at >= ?  AND created_at < ?', @walk.created_at.to_date, @walk.created_at.to_date + 1).size <= 1
-    #     date = @walk.created_at.strftime("%Y-%m-%d")
-    #     @calendar.where(start: date, user_id: current_user.id).destroy_all
-    # end
+    if Walk.where('created_at >= ?  AND created_at < ?', @walk.created_at.to_date, @walk.created_at.to_date + 1).size <= 1
+         date = @walk.created_at.strftime("%Y-%m-%d")
+         @calendar.where(start: date, user_id: current_user.id).destroy_all
+    end
     @walk.destroy
     redirect_to walks_path
   end

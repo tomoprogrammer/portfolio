@@ -26,6 +26,13 @@
         $('#calendar').fullCalendar({
             locale: 'ja',
             events: '/calendars.json',
+            eventClick: function(info) {
+                info.jsEvent.preventDefault(); // don't let the browser navigate
+
+                if (info.event.url) {
+                    window.open(info.event.url);
+                }
+            },
             eventRender: function(event, element) {
                 $(element).find(".fc-time").remove();
             }
