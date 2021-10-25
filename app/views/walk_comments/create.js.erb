@@ -1,0 +1,3 @@
+$("#walk_<%= @walk.id %> .comments-count").html("コメント数: <%= @walk.walk_comments.count %>");
+$(".walk_comments").html("<%= j(render 'walk_comments/index', walk: @walk) %>");
+$("#walk_comment_comment").val("");

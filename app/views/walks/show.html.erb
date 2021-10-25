@@ -6,7 +6,7 @@
     <div class="col-md-8 offset-md-1">
      <table class="table table-striped table-hover">
       <tbody>
-       <tr>
+       <tr id="walk_<%= @walk.id %>">
          <td>
            <%=link_to user_path(@walk.user_id) do %>
              <%= attachment_image_tag @user, :profile_image, size: "40x40", format: 'jpeg' %>
@@ -28,19 +28,23 @@
           <td>
             コメント件数：<%= @walk.walk_comments.count %>
           </td>
-          <% if @walk.favorited_by?(current_user) %>
-            <td id="favorite_buttons_<%= @walk.id %>">
-              <%= link_to walk_favorites_path(@walk.id), method: :delete do %>
-                ♥<%= @walk.favorites.count %>
-              <% end %>
-            </td>
-          <% else %>
-            <td>
-              <%= link_to walk_favorites_path(@walk.id), method: :post do %>
-                ♡<%= @walk.favorites.count %>
-              <% end %>
-            </td>
-          <% end %>
+          <td class="favorite-btn">
+           <%= render "favorites/favorite-btn", walk: @walk %>
+          </td>
+          <%# if @walk.favorited_by?(current_user) %>
+            <!--<td id="favorite_buttons_<%#= @walk.id %>">-->
+              <%#= link_to walk_favorites_path(@walk.id), method: :delete do %>
+                <%#= @walk.favorites.count %>
+              <%# end %>
+            <!--</td>-->
+          <%# else %>
+            <!--<td>-->
+              <%#= link_to walk_favorites_path(@walk.id), method: :post do %>
+                <%#= @walk.favorites.count %>
+              <%# end %>
+            <!--</td>-->
+          <%# end %>
+
           <% if @walk.user == current_user %>
             <td>
               <%= link_to "修正する", edit_walk_path(@walk.id), class: "btn btn-sm btn-success" %>
@@ -53,30 +57,13 @@
       </tbody>
     </table>
     <h5>コメント一覧</h5>
-    <table class="table table-striped table-hover">
-      <tbody>
-        <% @walk.walk_comments.each do |walk_comment| %>
-          <tr>
-            <td>
-              <%= walk_comment.user.name %>
-            </td>
-            <td>
-              <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
-            </td>
-            <% if walk_comment.user == current_user %>
-              <td>
-                <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-       <h5>コメントを入れる</5>
-         <%= form_with(model:[@walk, @walk_comment], local: true, method: :post) do |f| %>
-          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-         <% end %>
+      <table id="walk_comment<%= @walk.id %>">
+       <%= render "walk_comments/index", walk: @walk %>
+      </table>
+      <h5>コメントを入れる</5>
+       <div id="walk_comment<%= @walk.id %>">
+         <%= render 'walk_comments/form', walk: @walk, comment: @comment %>
+       </div>
     </div>
   </div>
 </div>

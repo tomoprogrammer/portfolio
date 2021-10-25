@@ -1,0 +1,25 @@
+<table class="table table-striped table-hover">
+      <tbody>
+        <% walk.walk_comments.each do |walk_comment| %>
+          <tr id="walk_comment_<%= walk_comment.id %>">
+            <td>
+             <%= link_to user_path(walk.user_id) do %>
+               <%= attachment_image_tag walk_comment.user, :profile_image, size: "40x40", format: 'jpeg' %>
+             <% end %>
+             <br>
+               <%= link_to user_path(walk.user.id) do %>
+                 <%= walk_comment.user.name %>
+               <% end %>
+            </td>
+            <td>
+              <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
+            </td>
+            <% if walk_comment.user == current_user %>
+              <td>
+                <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
