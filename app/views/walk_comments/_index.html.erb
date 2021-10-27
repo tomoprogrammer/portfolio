@@ -12,11 +12,14 @@
                <% end %>
             </td>
             <td>
-              <%= walk_comment.created_at.strftime('%Y/%m/%d') %><%= walk_comment.comment %>
+              <%= walk_comment.created_at.strftime('%Y/%m/%d') %>
             </td>
+            <td>
+             <%= walk_comment.comment %>
+             </td>
             <% if walk_comment.user == current_user %>
               <td>
-                <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, class: "btn btn-sm btn-danger" %>
+                <%= link_to "コメント削除", walk_walk_comment_path(walk_comment.walk.id, walk_comment.id), method: :delete, remote: :true, class: "btn btn-sm btn-danger" %>
               </td>
             <% end %>
           </tr>

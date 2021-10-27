@@ -23,9 +23,9 @@
             <%= @walk.memo %>
           </td>
           <td>
-            <%= attachment_image_tag @walk, :walk_image, size: "100x100", format: 'jpeg' %>
+            <%= attachment_image_tag @walk, :walk_image, size: "64x64", format: 'jpeg', fallback: "icon_002640_64.png" %>
           </td>
-          <td>
+          <td id="comment_count">
             コメント件数：<%= @walk.walk_comments.count %>
           </td>
           <td class="favorite-btn">
@@ -57,11 +57,11 @@
       </tbody>
     </table>
     <h5>コメント一覧</h5>
-      <table id="walk_comment<%= @walk.id %>">
+      <div id="walk_comment_<%= @walk.id %>">
        <%= render "walk_comments/index", walk: @walk %>
-      </table>
+      </div>
       <h5>コメントを入れる</5>
-       <div id="walk_comment<%= @walk.id %>">
+       <div id="walk_comment_<%= @walk.id %>">
          <%= render 'walk_comments/form', walk: @walk, comment: @comment %>
        </div>
     </div>

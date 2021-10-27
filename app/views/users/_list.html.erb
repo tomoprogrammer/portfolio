@@ -27,7 +27,8 @@
  <span class="followers">
   <%= link_to user.followers.count, user_followers_path(user) %>
  </span>
-</div>
+ </div>
+ <%= link_to "編集する", edit_user_path(@user), class:"btn btn-secondary" %>
 
 <h4 class="mt-5">ユーザー歩数ランキング</h4>
 

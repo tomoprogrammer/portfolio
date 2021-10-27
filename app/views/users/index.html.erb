@@ -17,7 +17,7 @@
             <% @users.each do |user| %>
               <tr>
                 <td>
-                  <%= attachment_image_tag user, :profile_image, :fill,40,40, format: 'jpag' %>
+                  <%= attachment_image_tag user, :profile_image, :fill,40,40, format: 'jpag', fallback: "icon_032200_48.jpg" %>
                 </td>
                 <td>
                   <%= user.name %>
