@@ -1,6 +1,7 @@
 
     <div class="col-md-8 offset-md-1">
       <h2>ユーザー一覧</h2>
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>画像</th>
@@ -9,11 +10,10 @@
           </tr>
        </thead>
       <tbody>
-       <table class="table table-striped">
         <% users.each do |user| %>
           <tr>
             <td>
-              <%= attachment_image_tag user, :profile_image, :fill,40,40, format: 'jpag' %>
+              <%= attachment_image_tag user, :profile_image, :fill,48,48, format: 'jpag', fallback: "icon_032200_48.jpg" %>
             </td>
             <td>
               <%= user.name %>

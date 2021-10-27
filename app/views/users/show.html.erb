@@ -52,8 +52,8 @@
               <table class="table table-hover table-inverse">
                 <thead>
                   <tr>
-                    <th>記録日時</th>
-                    <th>歩数</th>
+                    <th><%= sort_order "created_at", "記録日時" %></th>
+                    <th><%= sort_order "walk_count", "歩数" %></th>
                     <th>メモ</th>
                     <th>写真</th>
                    </tr>
@@ -71,12 +71,15 @@
                          <%= walk.memo %>
                        </td>
                        <td>
-                         <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg' %>
+                         <%= attachment_image_tag walk, :walk_image, :fill, 100, 100, format: 'jpeg', fallback: "icon_002640_64.png" %>
                        </td>
                      </tr>
                   <% end %>
                 </tbody>
               </table>
+              <div style="text-align: center;">
+                <%= paginate(@walks) %>
+              </div>
   </div>
  </div>
 </div>

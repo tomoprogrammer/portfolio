@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2021_10_24_124056) do
-
   create_table "calendars", force: :cascade do |t|
     t.integer "count"
     t.datetime "start"
@@ -66,5 +65,4 @@ ActiveRecord::Schema.define(version: 2021_10_24_124056) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end

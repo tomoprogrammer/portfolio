@@ -9,7 +9,6 @@ module Common
       walk_ranking += [user: user, walk_count: value]
     end
 
-    return walk_ranking
+    walk_ranking
   end
-
 end

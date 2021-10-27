@@ -4,7 +4,7 @@
           <tr id="walk_comment_<%= walk_comment.id %>">
             <td>
              <%= link_to user_path(walk.user_id) do %>
-               <%= attachment_image_tag walk_comment.user, :profile_image, size: "40x40", format: 'jpeg' %>
+               <%= attachment_image_tag walk_comment.user, :profile_image, size: "40x40", format: 'jpeg', fallback: "icon_032200_48.jpg" %>
              <% end %>
              <br>
                <%= link_to user_path(walk.user.id) do %>

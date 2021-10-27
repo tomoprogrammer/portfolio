@@ -9,10 +9,12 @@
            <thead>
              <tr>
                <th>ユーザー</th>
-               <th>記録日時</th>
-               <th>歩数</th>
+               <th><%= sort_order "created_at", "記録日時" %></th>
+               <th><%= sort_order "walk_count", "歩数" %></th>
                <th>メモ</th>
                <th>写真</th>
+               <th>コメント</th>
+               <th>いいね</th>
              </tr>
            </thead>
              <tbody>
@@ -56,6 +58,9 @@
               <% end %>
             </tbody>
           </table>
+          <div style="text-align: center;">
+            <%= paginate(@walks) %>
+          </div>
     </div>
   </div>
 </div>

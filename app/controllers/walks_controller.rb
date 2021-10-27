@@ -1,5 +1,7 @@
 class WalksController < ApplicationController
+  before_action :authenticate_user!
   include Common
+  helper_method :sort_column, :sort_direction
 
   def new
     @walk = Walk.new
@@ -9,14 +11,13 @@ class WalksController < ApplicationController
     @walk = Walk.new(walk_params)
     @walk.user_id = current_user.id
     if @walk.save
-      #Calendar.save_calendar(@walk.created_at.strftime("%Y-%m-%d"))
+      # Calendar.save_calendar(@walk.created_at.strftime("%Y-%m-%d"))
       date = @walk.created_at.strftime("%Y-%m-%d")
-      if Calendar.where(start: date).blank?
-        @calendar = Calendar.new({user_id: current_user.id, start: date, end: date})
+      # if Calendar.where(start: date).blank?
+        @calendar = Calendar.new({ user_id: current_user.id, start_at: date, end_at: date })
         @calendar.save
-      end
-      #c = Calendar.where(start: date)
-        #cal = Calendar.where(start: date).count = c.count + @walk.walk_count;  cal.save
+      # c = Calendar.where(start: date)
+      # cal = Calendar.where(start: date).count = c.count + @walk.walk_count;  cal.save
       flash[:notice] = '記録が完了しました'
       redirect_to walks_path
     else
@@ -31,10 +32,10 @@ class WalksController < ApplicationController
       date = DateTime.parse(params[:date])
       @walks = Walk.where('created_at >= ?  AND created_at < ?', date, date + 1)
     else
-      @walks = Walk.all
+      @walks = Walk.order("#{sort_column} #{sort_direction}").page(params[:page]).per(10)
+      @user = current_user
+      @walk_ranking = get_walk_ranking
     end
-    @user = current_user
-    @walk_ranking = get_walk_ranking
   end
 
   def show
@@ -55,7 +56,12 @@ class WalksController < ApplicationController
   end
 
   def edit
-    @walk = Walk.find(params[:id])
+   @walk = Walk.find(params[:id])
+   if @walk.user == current_user
+    render "edit"
+   else
+    redirect_to walks_path
+   end
   end
 
   def update
@@ -72,8 +78,8 @@ class WalksController < ApplicationController
   def destroy
     @walk = Walk.find(params[:id])
     if Walk.where('created_at >= ?  AND created_at < ?', @walk.created_at.to_date, @walk.created_at.to_date + 1).size <= 1
-         date = @walk.created_at.strftime("%Y-%m-%d")
-         @calendar.where(start: date, user_id: current_user.id).destroy_all
+      date = @walk.created_at.strftime("%Y-%m-%d")
+      @calendar.where(start: date, user_id: current_user.id).destroy_all
     end
     @walk.destroy
     redirect_to walks_path
@@ -83,5 +89,13 @@ class WalksController < ApplicationController
 
   def walk_params
     params.require(:walk).permit(:walk_count, :memo, :walk_image)
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
+  def sort_column
+    Walk.column_names.include?(params[:sort]) ? params[:sort] : 'id'
   end
 end
