@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h1><strong>Walk_lifeへようこそ！</strong></h1>
+      <p>早速ログインして、歩数を記録して歩数を増やしていきましょう！</p>
+      <div class="btn-wrapper col-10 mx-auto">
+        <p>ログインはこちら</p>
+        <div class="row">
+         <%= link_to "ログイン", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+        </div>
+        <p>初めてご利用される方はこちら</p>
+        <div class="row">
+         <%= link_to "新規登録", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up"%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

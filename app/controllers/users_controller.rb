@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @walks = @user.walks.order("#{sort_column} #{sort_direction}").page(params[:page]).per(10)
-    # byebug
     @walk_ranking = get_walk_ranking
   end
 
@@ -41,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+    %w(asc desc).include?(params[:direction]) ? params[:direction] : 'asc'
   end
 
   def sort_column

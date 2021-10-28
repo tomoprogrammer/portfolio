@@ -1,12 +1,21 @@
-<div class="container">
+<% if @walk.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @walk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+ <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <h1>歩数記録</h1>
        <%= form_with model: @walk, local:true do |f| %>
-         <h4>歩数</h4>
+         <h4>歩数(半角で入力)</h4>
          <%= f.text_field :walk_count, class:"form-control, size: 20" %>歩
 
-         <h4>メモ</h4>
+         <h4>メモ(目的地など)</h4>
          <%= f.text_area :memo, class:"form-control" %>
 
          <h4>画像</h4>

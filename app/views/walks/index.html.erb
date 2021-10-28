@@ -1,9 +1,10 @@
- <div class="container">
+<div class="container">
    <div class="row">
      <div class="col-md-3">
        <%= render 'users/list', user: current_user, walk_ranking: @walk_ranking %>
      </div>
      <div class="col-md-8 offset-md-1">
+      <%= notice %>
        <h1>歩数記録一覧</h1>
          <table class="table table-hover table-inverse">
            <thead>
@@ -41,19 +42,7 @@
                      コメント件数：<%= walk.walk_comments.count %>
                    </td>
                     <td class="favorite-btn"><%= render "favorites/favorite-btn", walk: walk %></td>
-                 <%# if walk.favorited_by?(current_user) %>
-                   <!--<td id="favorite_buttons_<%#= walk.id %>">-->
-                     <%#= link_to walk_favorites_path(walk.id), method: :delete do %>
-                       <%#= walk.favorites.count %>
-                     <%# end %>
-                   <!--</td>-->
-                 <%# else %>
-                   <!--<td>-->
-                     <%#= link_to walk_favorites_path(walk.id), method: :post do %>
-                       <%#= walk.favorites.count %>
-                     <%# end %>
-                   <!--</td>-->
-                 <%# end %>
+
                 </tr>
               <% end %>
             </tbody>

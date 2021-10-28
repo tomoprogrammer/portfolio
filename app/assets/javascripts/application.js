@@ -14,44 +14,10 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require moment
-//= require fullcalendar
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
 //= require_tree .
 
+
 // $(function () {
-
-    $(document).on('turbolinks:load', function () {
-        $('#calendar').fullCalendar({
-            locale: 'ja',
-            events: '/calendars.json',
-            eventClick: function(info) {
-                info.jsEvent.preventDefault(); // don't let the browser navigate
-
-                if (info.event.url) {
-                    window.open(info.event.url);
-                }
-            },
-            eventRender: function(event, element) {
-                $(element).find(".fc-time").remove();
-            }
-        });
-        /*
-
-        function eventCalendar() {
-            return $('#calendar').fullCalendar({});
-        };
-        function clearCalendar() {
-            $('#calendar').html('');
-        };
-        $(document).on('turbolinks:load', function () {
-            alert('TEST');
-          eventCalendar();
-        });
-        $(document).on('turbolinks:before-cache', clearCalendar);
-        */
-    });
-
-
-// });

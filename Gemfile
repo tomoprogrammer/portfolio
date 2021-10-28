@@ -67,7 +67,7 @@ gem 'devise'
 
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
-gem 'kaminari','~> 1.2.1'
+gem 'kaminari', '~> 1.2.1'
 
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
@@ -77,7 +77,10 @@ group :development, :test do
   gem 'rubocop-airbnb'
 end
 
-gem 'fullcalendar-rails'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+gem 'rails-i18n'
+
 gem 'momentjs-rails'
 
 gem 'dotenv-rails'
